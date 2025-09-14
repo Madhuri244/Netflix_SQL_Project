@@ -44,7 +44,7 @@ DROP TABLE IF EXISTS netflix;
 
 ### 2. Find the Most Common Rating for Movies and TV Shows
 
-'''sql
+```sql
      SELECT TYPE, RATING FROM
     (
     SELECT TYPE, RATING,COUNT(*),
@@ -54,19 +54,19 @@ DROP TABLE IF EXISTS netflix;
     ) AS T1 
     WHERE
     RANKING =1;
-    '''
+ ```
 
 ### 3.List All Movies Released in a Specific Year (e.g., 2020)
 
-   '''sql
+  ```sql
    SELECT * 
     FROM netflix
     WHERE release_year = 2020;
-    '''
+   ```
 
 ### 4. Find the Top 5 Countries with the Most Content on Netflix
 
-   '''sql
+   ```sql
     SELECT 
     UNNEST(STRING_TO_ARRAY(COUNTRY,',')) AS NEW_COUNTRY,
     COUNT(SHOW_ID) AS TOTAL_CONTENT
@@ -74,90 +74,89 @@ DROP TABLE IF EXISTS netflix;
     GROUP BY 1
     ORDER BY 2 DESC 
     LIMIT 5;
-    '''
+   ```
 
 ### 5. Identify the Longest Movie
 
-   '''sql
+   ```sql
    SELECT * FROM NETFLIX 
     WHERE 
     TYPE='MOVIE'
     AND 
     DURATION =(SELECT MAX(DURATION) FROM NETFLIX);
-    '''
+   ```
 
 ### 6. Find Content Added in the Last 5 Years
     
-   '''sql
+   ```sql
     SELECT * FROM NETFLIX 
     WHERE TO_DATE(DATE_ADDED, ' MONTH DD,YYYY') > CURRENT_DATE - INTERVAL '5 YEARS';
-    '''
+   ```
 
 ### 7. Find All Movies/TV Shows by Director 'George Ford'
 
-  '''sql
+```sql
   SELECT TYPE FROM NETFLIX
   WHERE DIRECTOR ILIKE  '%George Ford%';
-  '''
+  ```
 
 ### 8. List All TV Shows with More Than 5 Seasons
   
-   '''sql
+   ```sql
   SELECT *  FROM NETFLIX 
   WHERE 
   TYPE = 'TV Show'
   AND 
   CAST(SPLIT_PART(DURATION, '', 1) AS INTEGER) > 5 ;
-  '''
+```
 
 ### 9. Count the Number of Content Items in Each Genre
     
-   '''sql
+   ```sql
     SELECT LISTED_IN, COUNT(SHOW_ID) AS TOTAL_CONTENT,
     UNNEST(STRING_TO_ARRAY(LISTED_IN,',')) AS GENRE
     FROM NETFLIX
     GROUP BY 1;
-    '''
-
+   ```
 
 ### 10.Find each year and the average numbers of content release in PAKISTAN on netflix.
 return top 5 year with highest avg content release!
 
-  '''sql
+  ```sql
   SELECT extract( year from TO_DATE(DATE_ADDED, 'Month DD, YYYY')) AS year, 
   count(*) as yearly_content,
   ROUND(count(*)::NUMERIC/(select count(*) FROM NETFLIX WHERE COUNTRY ='PAKISTAN')::NUMERIC * 100,2) as avg_content
   from netflix
   WHERE COUNTRY ='PAKISTAN'
   group by 1;
-  '''
+ ```
 
 ### 11. List All Movies that are Documentaries
 
-   '''sql
+ ```sql
    SELECT * FROM NETFLIX 
    WHERE LISTED_IN ILIKE '%documentaries%';
-   '''
+   ```
 
 ### 12. Find All Content Without a Director
 
-   '''sql
+  ```sql
     SELECT * FROM NETFLIX 
     WHERE  DIRECTOR IS NULL;
-    '''
+   ```
 
 ### 13.FIND HOW MANY MOVIES DIRECTOR 'DANIEL' APPEARED IN LAST 10  YEARS!
 
-  '''sql
+ ```sql
   SELECT * FROM NETFLIX 
   WHERE DIRECTOR ILIKE '%DANIEL%' 
   AND
   RELEASE_YEAR > EXTRACT(YEAR FROM CURRENT_DATE) - 10;
-  '''
+  ```
 
 ### 14.FIND THE TOP 10 DIRECTORS WHO HAVE APPEARED IN THE HIGHEST NUMBER OF MOVIES PRODUCED IN CANADA?
   
- '''sql
+```sql
  SELECT  UNNEST(STRING_TO_ARRAY(DIRECTOR,',') ) AS DIRECTORS, 
   COUNT(*) AS TOATL_CONTENT 
   FROM NETFLIX 
@@ -165,7 +164,7 @@ return top 5 year with highest avg content release!
   GROUP BY 1 
   ORDER BY 2 DESC 
   LIMIT 10;
-  '''
+  ```
 
 
 ##Findings and Conclusion
