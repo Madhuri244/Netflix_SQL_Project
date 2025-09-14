@@ -17,8 +17,8 @@ The data for this project is sourced from the Kaggle dataset:
  - **Dataset Link: ** [Movies Dataset](https://www.kaggle.com/datasets/shivamb/netflix-shows/data)
 
 ## Schema
-'''sql
-  DROP TABLE IF EXISTS netflix;
+```sql
+DROP TABLE IF EXISTS netflix;
   CREATE TABLE netflix
   (
       show_id      VARCHAR(5),
@@ -30,16 +30,17 @@ The data for this project is sourced from the Kaggle dataset:
       release_year INT,
       rating       VARCHAR(15),
       duration     VARCHAR(15),
-      listed_in    VARCHAR(250),
-  );'''
+      listed_in    VARCHAR(250)
+;
+```
 
  ##Business Problems and Solutions
 
  ### 1. Count the Number of Movies vs TV Shows
     
-   '''sql
+   ```sql
    SELECT TYPE, count(*) AS TOTAL_COUNT from NETFLIX GROUP BY TYPE;
-     '''
+   ```
 
 ### 2. Find the Most Common Rating for Movies and TV Shows
 
