@@ -31,8 +31,7 @@ The data for this project is sourced from the Kaggle dataset:
       rating       VARCHAR(15),
       duration     VARCHAR(15),
       listed_in    VARCHAR(250),
-  );
-  '''
+  );'''
 
  ##Business Problems and Solutions
 
